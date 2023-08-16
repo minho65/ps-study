@@ -1,0 +1,13 @@
+class Solution(object):
+    def mergeAlternately(self, word1, word2):
+        length = max(len(word1), len(word2))
+        arr = ['' for _ in range(length * 2)]
+        
+        for i in range(length):
+            if len(word1)-1 >= i :
+                arr[i*2] = word1[i]
+            
+            if len(word2)-1 >= i :
+                arr[i*2+1] = word2[i]
+            
+        return ''.join(arr)
