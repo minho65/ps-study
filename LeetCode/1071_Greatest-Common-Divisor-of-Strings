@@ -1,0 +1,35 @@
+"""
+  Long runtime / Low memory
+"""
+
+class Solution:
+    def generateDivisor(self, input: str) -> []:
+        result = []
+        length = len(input)
+
+        for i in range(length):
+            for j in range(i, length):
+                cur = input[i:j+1]
+                
+                if len(input) % len(cur) == 0:
+                    cnt = len(input) // len(cur)
+                    test = cur * cnt
+
+                    if test == input and cur not in result :
+                        result.append(cur)
+        
+        return result
+
+
+
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        answer = ""
+
+        arr1 = self.generateDivisor(str1)
+        arr2 = self.generateDivisor(str2)
+
+        for token in arr1:
+            if token in arr2 and len(answer) < len(token):
+                answer = token
+        
+        return answer
