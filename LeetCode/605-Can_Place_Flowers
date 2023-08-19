@@ -1,0 +1,35 @@
+class Solution:
+
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+
+        for i in range(len(flowerbed)):
+            prevIdx = i - 1
+            nextIdx = i + 1
+
+            if flowerbed[i] != 0:
+                continue
+            # flowerbed 길이 1
+            elif prevIdx < 0 and nextIdx > len(flowerbed) - 1 and flowerbed[i] == 0:
+                flowerbed[i] = 1
+                n -= 1
+            # 가장 앞쪽
+            elif prevIdx < 0:
+                if nextIdx < len(flowerbed) and flowerbed[nextIdx] == 0:
+                    flowerbed[i] = 1
+                    n -= 1
+            # 가장 뒤쪽
+            elif nextIdx > len(flowerbed) - 1:
+                if flowerbed[prevIdx] == 0:
+                    flowerbed[i] = 1
+                    n -= 1
+            # 중간
+            elif flowerbed[prevIdx] == 0 and flowerbed[nextIdx] == 0:
+                flowerbed[i] = 1
+                n -= 1
+            
+            
+            if n <= 0:
+                break
+
+
+        return True if n <= 0 else False
