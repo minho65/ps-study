@@ -1,0 +1,12 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        cur = 0
+
+        for idx in range(len(t)):
+            if cur >= len(s):
+                break
+            
+            elif s[cur] == t[idx]:
+                cur += 1
+        
+        return True if cur >= len(s) else False
