@@ -1,0 +1,19 @@
+"""
+  값Type의 경우 값이 새로 할당되면 새로운 Object를 제공한다.
+    -> Memory 관련 참고할점
+"""
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        answer = sum(nums[0:k])
+        cur_sum = [answer]
+
+        num_len = len(nums)
+        
+        for i in range(k, num_len):
+            if i < num_len:
+                cur_sum[0] = cur_sum[0] + nums[i] - nums[i-k]    
+            
+            if cur_sum[0] > answer:
+                answer = cur_sum[0]
+
+        return answer / k
