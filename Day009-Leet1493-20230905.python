@@ -1,0 +1,48 @@
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        answer = 0
+
+        token = []
+        cur = 0
+
+        for num in nums:
+            if num == 0:
+                if cur != 0:
+                    token.append(cur)
+                    token.append(0)
+                    cur = 0
+                else:
+                    token.append(0)
+            else:
+                cur += 1
+        
+        if cur != 0:
+            token.append(cur)
+
+        # 1로만 구성된 경우 무조건 하나는 제거해야함
+        if len(token) == 1:
+            return token[0] - 1 if token[0] > 0 else 0
+
+        for i in range(len(token)):
+            if token[i] == 0:
+                continue
+            
+            cur = token[i]
+            frontMax = 0
+            backMax = 0
+
+            # 앞쪽 0 skip 시 최대값
+            if i - 2 >= 0 and token[i-2] != 0:
+                frontMax = cur + token[i-2]
+            
+            # 뒤쪽 0 skip 시 최대값
+            if i + 2 < len(token) and token[i+2] != 0:
+                backMax = cur + token[i+2]
+            
+            # 앞 뒤쪽 모두 0으로만 구성된 경우도 고려 필요
+            curMax = max(cur, frontMax, backMax)
+            
+            if answer < curMax:
+                answer = curMax
+
+        return answer
