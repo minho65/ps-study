@@ -1,0 +1,13 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        tokens = s.split(' ')
+        answer = []
+
+        def isBlank(s: str) -> bool:
+            return not(s and s.strip())
+
+        for token in reversed(tokens):
+            if not isBlank(token):
+                answer.append(token)
+
+        return ' '.join(answer)
