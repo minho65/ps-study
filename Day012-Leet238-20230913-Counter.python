@@ -1,0 +1,37 @@
+from collections import Counter
+
+class Solution:
+    def multipleNum(self, num: int, cnt: int) -> List[int]:
+        if cnt == 1:
+            return [num]
+        
+        tmp = 1
+
+        for i in range(cnt-1):
+            tmp *= num
+
+        return [tmp, tmp*num]
+    
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        answer = []
+
+        num_dic = dict(Counter(nums))
+        mul_dic = dict()
+
+        for key, value in num_dic.items():
+            mul_dic[key] = self.multipleNum(key, value)
+        
+        for num in nums:
+            tmp = 1
+            for key, value in mul_dic.items():
+                if num != key:
+                    tmp *= value[-1]
+                else:
+                    if len(value) == 1:
+                        continue
+                    else:
+                        tmp *= value[0]
+            
+            answer.append(tmp)
+
+        return answer
