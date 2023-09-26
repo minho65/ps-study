@@ -1,0 +1,23 @@
+"""
+    numpy.where(np.array == token) 
+        - 특정값과 동일한 원소의 인덱스를 모두 찾는다.
+        - numpy.array와 함께 사용해야함
+
+    fisrt와 second의 순서와 크기를 보장하며 값을 채워주는 방식
+        - [1 3 -1 *] 과 같은 케이스가 나타나도 두번째 if의 조건으로 인해 triplet 여부를 검증 할 수 있다.
+"""
+import sys
+
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        first = second = math.inf
+
+        for num in nums:
+            if num <= first:
+                first = num
+            elif num <= second:
+                second = num
+            else:
+                return True
+
+        return False
